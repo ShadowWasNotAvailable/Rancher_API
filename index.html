@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Input name" id="slimeIdInput"> <br>
+    <button id="testknapp">Fetch Slime</button>
+    <h3 id="resfield"></h3>
+
+    <script>
+        document.getElementById('testknapp').addEventListener('click', () => {
+            const slimeId = document.getElementById('slimeIdInput').value;
+
+            fetch(`/getslimes?id=${slimeId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const slimeology = data.slime.slimepedia.slimeology;
+                    const risks = data.slime.slimepedia.risks;
+                    const plortonomics = data.slime.slimepedia.plortonomics;
+                        
+                    
+                    
+                    document.getElementById('resfield').textContent = 
+                        "Slimepedia: " + "\n" +
+                        "Slimeology: " + slimeology + "\n" +
+                        "Risks: " + risks + "\n" +
+                        "Plortonomics: " + plortonomics;
+                })
+                .catch(error => console.error('Error fetching slimes:', error));
+        });
+    </script>
+</body>
+</html>
